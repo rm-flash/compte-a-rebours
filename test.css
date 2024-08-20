@@ -20,8 +20,6 @@ body {
     text-align: center;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
     animation: fadeIn 1s ease-in-out;
-    max-width: 100%; /* Assure que le conteneur ne dépasse pas l'écran */
-    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
 }
 
 /* Animation de l'apparition du conteneur */
@@ -31,18 +29,17 @@ body {
 }
 
 /* Styles pour les champs d'entrée et les boutons */
-input, button {
+input, button, select {
     margin: 10px;
     padding: 10px;
     font-size: 1rem;
     border-radius: 5px;
     border: none;
     outline: none;
-    width: 100%;
-    box-sizing: border-box; /* Inclut le padding et la bordure dans la largeur totale */
 }
 
 input {
+    width: 100%;
     max-width: 300px;
 }
 
@@ -92,8 +89,6 @@ button:hover {
 /* Conteneur des flèches */
 .arrow-container {
     margin-top: 20px;
-    display: flex;
-    justify-content: center; /* Centre les flèches horizontalement */
 }
 
 /* Styles pour les flèches de navigation */
@@ -115,45 +110,4 @@ button:hover {
     0% { background-position: 0% 0%; }
     50% { background-position: 100% 100%; }
     100% { background-position: 0% 0%; }
-}
-
-/* Styles responsive pour les petits écrans */
-@media (max-width: 600px) {
-    .number {
-        font-size: 1.5rem; /* Réduit la taille des chiffres pour les petits écrans */
-    }
-
-    .label {
-        font-size: 0.9rem; /* Réduit la taille du texte des labels pour les petits écrans */
-    }
-
-    .arrow {
-        font-size: 1.5rem; /* Réduit la taille des flèches pour les petits écrans */
-        margin: 0 10px; /* Réduit l'espace autour des flèches */
-    }
-
-    .container {
-        padding: 10px; /* Réduit le padding pour les petits écrans */
-    }
-
-    /* Réduit la taille du texte des boutons et des champs d'entrée sur les petits écrans */
-    input, button {
-        font-size: 0.9rem;
-    }
-}
-
-/* Styles responsive pour les écrans moyens */
-@media (min-width: 601px) and (max-width: 1024px) {
-    .number {
-        font-size: 1.8rem; /* Taille légèrement réduite pour les écrans moyens */
-    }
-
-    .label {
-        font-size: 1rem;
-    }
-
-    .arrow {
-        font-size: 1.8rem; /* Taille légèrement réduite pour les écrans moyens */
-        margin: 0 15px;
-    }
 }
