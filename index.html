@@ -8,9 +8,19 @@
 </head>
 <body>
     <div class="container">
-        <h1>Compte à Rebours</h1>
+        <h1>Calculateur de Temps</h1>
+        
+        <label for="calculationType">Type de calcul:</label>
+        <select id="calculationType">
+            <option value="countdown">Compte à Rebours</option>
+            <option value="elapsedTime">Retour dans le Temps</option>
+            <option value="timeSinceBirth">Temps depuis la Naissance</option>
+        </select>
+        
         <input type="date" id="dateInput" />
+        <input type="time" id="timeInput" />
         <button onclick="calculateTime()">Calculer le Temps</button>
+
         <div id="result" class="result-group">
             <!-- Les résultats seront affichés ici -->
         </div>

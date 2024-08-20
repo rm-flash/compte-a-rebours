@@ -2,6 +2,8 @@ let currentView = 0; // 0: années/jour/heure/min/sec, 1: heures totales, 2: min
 
 function calculateTime() {
     const inputDate = document.getElementById('dateInput').value;
+    const inputTime = document.getElementById('timeInput').value;
+    const calculationType = document.getElementById('calculationType').value;
     const result = document.getElementById('result');
 
     if (!inputDate) {
@@ -9,46 +11,32 @@ function calculateTime() {
         return;
     }
 
-    const targetDate = new Date(inputDate);
+    let targetDate = new Date(inputDate);
+    if (inputTime) {
+        const [hours, minutes] = inputTime.split(':');
+        targetDate.setHours(hours);
+        targetDate.setMinutes(minutes);
+    }
+    
     const now = new Date();
+
+    let timeDifference;
+    if (calculationType === 'countdown') {
+        timeDifference = targetDate - now;
+    } else {
+        timeDifference = now - targetDate;
+    }
 
     function updateCountdown() {
         const now = new Date();
-        const timeDifference = targetDate - now;
+        if (calculationType === 'countdown') {
+            timeDifference = targetDate - now;
+        } else {
+            timeDifference = now - targetDate;
+        }
 
-        if (timeDifference <= 0) {
-            result.innerHTML = `<div class="time-part" id="yearsPart" style="display:${currentView === 0 ? 'flex' : 'none'};">
-                                    <span class="number">00</span>
-                                    <span class="label">Années</span>
-                                </div>
-                                <div class="time-part" id="daysPart" style="display:${currentView === 0 ? 'flex' : 'none'};">
-                                    <span class="number">00</span>
-                                    <span class="label">Jours</span>
-                                </div>
-                                <div class="time-part" id="hoursPart" style="display:${currentView === 0 ? 'flex' : 'none'};">
-                                    <span class="number">00</span>
-                                    <span class="label">Heures</span>
-                                </div>
-                                <div class="time-part" id="minutesPart" style="display:${currentView === 0 ? 'flex' : 'none'};">
-                                    <span class="number">00</span>
-                                    <span class="label">Minutes</span>
-                                </div>
-                                <div class="time-part" id="secondsPart" style="display:${currentView === 0 ? 'flex' : 'none'};">
-                                    <span class="number">00</span>
-                                    <span class="label">Secondes</span>
-                                </div>
-                                <div class="time-part" id="totalHoursPart" style="display:${currentView === 1 ? 'flex' : 'none'};">
-                                    <span class="number">00</span>
-                                    <span class="label">Heures Totales</span>
-                                </div>
-                                <div class="time-part" id="totalMinutesPart" style="display:${currentView === 2 ? 'flex' : 'none'};">
-                                    <span class="number">00</span>
-                                    <span class="label">Minutes Totales</span>
-                                </div>
-                                <div class="time-part" id="totalSecondsPart" style="display:${currentView === 3 ? 'flex' : 'none'};">
-                                    <span class="number">00</span>
-                                    <span class="label">Secondes Totales</span>
-                                </div>`;
+        if (timeDifference < 0 && calculationType === 'countdown') {
+            result.innerHTML = "La date cible est déjà passée.";
             return;
         }
 
@@ -95,9 +83,7 @@ function calculateTime() {
                                 <span class="label">Secondes Totales</span>
                             </div>`;
 
-        if (timeDifference > 0) {
-            setTimeout(updateCountdown, 1000);
-        }
+        setTimeout(updateCountdown, 1000);
     }
 
     function updateVisiblePart() {
